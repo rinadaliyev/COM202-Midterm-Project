@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Stack.h"
 #include <string>
+#include <fstream>
+#include <cstdlib>
 using namespace std;
 
 bool isBalanced(string str) {
@@ -33,46 +35,59 @@ bool isBalanced(string str) {
 
 
 int main() {
-    int selection = 0;
-    string input;
-    string exp;
+    string line;
+    string content = "";
+    string warning;
+    string contentWarning;
+    string introText;
+    string filename;
+    
+    cout << "Enter Your File Name (with extension): ";
+    cin >> filename;
 
-    while (selection < 2)
-    {
-        cout << "Select Operation:" << endl;
-        cout << "1. Test Paranthesis Balance." << endl;
-        cout << "2. Quit." << endl;
+    ofstream file(filename);
 
-        getline(cin, input); 
-
-        try {
-            selection = stoi(input); 
-
-        }
-        catch (...) {
-            cout << "Invalid input. Please enter a number.\n";
-            continue; 
-        }
-
-        if (selection > 2) {
-            cout << "Invalid input. Please enter a number in the range.\n";
-            continue;
-        }
-
-
-        if (selection == 1) {
-            cout << "Enter your expression:" << endl;
-            getline(cin, exp);
-
-            if (isBalanced(exp))
-            {
-                cout << "Balanced " << endl;
-            }
-            else {
-                cout << "NOT balanced " << endl;
-            }
-        }
+    if (!file) {
+        cout << "Error creating file!" << endl;
+        return 1;
     }
+
+    introText = "Start typing. Your file is [ " + filename + " ] Type $SAVE for saving. ";
+
+
+    system("cls");
+    cout << introText << endl;
+    cin.ignore();
+
+    while (true)
+    {
+        getline(cin, line);
+        if (line == "$SAVE") {
+            break;
+        }
+
+        content += line + "\n";
+
+        if (isBalanced(content)) {
+            warning = "";
+        }
+        else {
+            warning = "\033[41mParantheses are NOT balanced. \033[0m";
+        }
+
+        contentWarning = introText + warning + "\n" + content;
+
+        system("cls");
+        cout << contentWarning;
+
+
+
+    }
+
+    file << content;
+
+    file.close();
+    cout << "File Saved";
 
     return 0;
 }
