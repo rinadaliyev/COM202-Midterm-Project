@@ -1,7 +1,7 @@
 # COM202-Midterm-Project
-# Parenthesis Balance Checker 🖥️
+# Primary IDE Parenthesis Balance Checker🖥️
 
-A simple console-based application built with Dart for the COM202 Data Structures and Algorithms exam. This app helps users verify whether a given expression has balanced parentheses using a stack-based approach.
+A simple console-based application built with C++ for the COM202 Data Structures and Algorithms exam. This app helps users verify whether a given expression has balanced parentheses using a stack-based approach.
 
 Features
 ✅ Checks for balanced parentheses (), {}, and []
